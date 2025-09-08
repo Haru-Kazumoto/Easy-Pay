@@ -27,47 +27,61 @@
                     <ul
                         class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-white">
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-white bg-yellow-400 rounded-sm md:bg-transparent md:text-yellow-400 md:p-0 "
-                                aria-current="page">Dashboard</a>
+                            <Link :href="route('dashboard')" :class="[
+                                'block py-2 px-3 rounded-sm md:p-0',
+                                route().current('dashboard')
+                                    ? 'text-yellow-400'
+                                    : 'text-white hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400'
+                            ]">
+                            Dashboard
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link :href="route('bills.index')" :class="[
+                                'block py-2 px-3 rounded-sm md:p-0',
+                                route().current('bills.index')
+                                    ? 'text-yellow-400'
+                                    : 'text-white hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400'
+                            ]">
+                            Semua Tagihan
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="#"
+                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">
+                            Jadwal
+                            Tagihan</Link>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">Semua
-                                Tagihan</a>
+                            <Link href="#"
+                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">
+                            Tagihan
+                            Saya</Link>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">Jadwal
-                                Tagihan</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">Tagihan
-                                Saya</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">History
-                                Pembayaran</a>
+                            <Link href="#"
+                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">
+                            History
+                            Pembayaran</Link>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="w-full mt-3 max-w-6xl mx-auto px-4 md:px-0 ">
+        <div class="w-full mt-3 min-h-screen max-w-6xl mx-auto px-4 md:px-0">
             <slot />
         </div>
 
 
         <footer class="mt-20 bg-gray-800">
             <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between ">
-                <span class="text-sm sm:text-center text-gray-400">© 2023 <a
-                        href="#" class="hover:underline">CreativeDigital™</a>. All Rights Reserved.
+                <span class="text-sm sm:text-center text-gray-400">© 2023 <a href="#"
+                        class="hover:underline">CreativeDigital™</a>. All Rights Reserved.
                 </span>
-                <ul
-                    class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0">
+                <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0">
                     <li>
                         <a href="#" class="hover:underline me-4 md:me-6">About</a>
                     </li>
@@ -90,9 +104,9 @@
 <script setup lang="ts">
 import { Auth } from '@/Pages/types/global';
 import BaseLayout from './BaseLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
-import { NDropdown, NButton, NAvatar, NText } from 'naive-ui';
-import { h, PropType } from 'vue';
+import { Head, usePage, Link } from '@inertiajs/vue3';
+import { NDropdown, NSpin, NAvatar, NText } from 'naive-ui';
+import { h, ref } from 'vue';
 
 const props = defineProps({
     title: String,
@@ -100,6 +114,7 @@ const props = defineProps({
 });
 
 const page = usePage<{ auth: Auth }>();
+const changePage = ref(false);
 
 function renderCustomHeader() {
     return h(

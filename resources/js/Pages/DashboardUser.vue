@@ -1,17 +1,7 @@
 <template>
     <AppLayout title="Dashboard">
         <div class="flex flex-col gap-3 ">
-            <n-carousel autoplay draggable show-arrow :slides-per-view="1" dot-type="line"
-                class="rounded-xl overflow-hidden shadow-md">
-                <div v-for="i in 4" :key="i"
-                    class="w-full h-60 sm:h-64 md:h-72 bg-cover bg-center flex items-end p-4 sm:p-6"
-                    :style="{ backgroundImage: `url(images/slide-${i}.png)` }">
-                    <div class="bg-white bg-opacity-80 p-3 sm:p-4 rounded shadow w-full max-w-lg">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Title</h2>
-                        <p class="text-gray-600 text-sm">Deskripsi</p>
-                    </div>
-                </div>
-            </n-carousel>
+            <Carousels />
 
             <n-card class="shadow-md relative overflow-hidden " :style="{
                 backgroundImage: `url('images/ornamen-3.svg')`,
@@ -216,6 +206,7 @@ import ShortcutButton from '@/Components/ShortcutButton.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import BillsCard from "@/Components/BillsCard.vue";
 import PaymentHistoryCard from "@/Components/PaymentHistoryCard.vue";
+import Carousels from "@/Components/Carousels.vue";
 import { NCarousel, NCard, NAvatar, NList, NListItem, NTabs, NTabPane, NButton } from "naive-ui";
 
 defineProps({

@@ -1,11 +1,8 @@
 <?php
 
+use App\Http\Controllers\BillsController;
 use Illuminate\Support\Facades\Route;
 
-$auth_session = config('jetstream.auth_session');
-
-// Route::name('bills')
-//     ->middleware(['verified', $auth_session, 'auth:sanctum'])
-//     ->group(function() {
-//     Route::resource('bill', []);
-// });
+Route::middleware(['auth:sanctum','verified', config('jetstream.auth_session')])->group(function() {
+    Route::resource('bills', BillsController::class);
+});

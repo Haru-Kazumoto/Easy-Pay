@@ -18,6 +18,12 @@ const naiveuiThemeOverrides: GlobalThemeOverrides = {
         tabTextColorSegment: "white",
         // tabTextColorHoverSegment: "#facc15",
     },
+    Breadcrumb: {
+        itemTextColor: '#cfcfcf',
+        itemTextColorActive: 'white',
+        separatorColor: 'white',
+        itemTextColorHover: 'yellow'
+    }
 }
 
 const naiveuiThemeOverridesLoginLayout: GlobalThemeOverrides = {
