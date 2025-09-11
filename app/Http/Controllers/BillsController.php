@@ -36,7 +36,9 @@ class BillsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('Bills/Show', [
+            'id' => $id
+        ]);
     }
 
     /**

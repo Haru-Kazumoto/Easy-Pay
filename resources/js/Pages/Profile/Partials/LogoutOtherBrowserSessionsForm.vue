@@ -44,13 +44,13 @@ const closeModal = () => {
 
 <template>
     <ActionSection>
-        <template #title>
+        <!-- <template #title>
             Browser Sessions
         </template>
 
         <template #description>
             Manage and log out your active sessions on other browsers and devices.
-        </template>
+        </template> -->
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
