@@ -140,7 +140,7 @@
 
                             <n-list clickable>
                                 <n-list-item v-for="i in 3" :key="i" class="mb-3">
-                                    <PaymentHistoryCard />
+                                    <PaymentHistoryCard :id="i" />
                                 </n-list-item>
                             </n-list>
 

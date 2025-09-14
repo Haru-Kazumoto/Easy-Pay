@@ -1,37 +1,19 @@
 <template>
-    <AppLayout :title="title">
-        <HeaderBanner :breadcrumbs :title />
+    <AppLayout title="Riwayat Pembayaran">
+        <HeaderBanner title="Riwayat Pembayaran" />
+
 
         <n-card class="my-3">
             <div class="flex flex-col gap-2">
                 <div class="grid grid-cols-12 gap-3 my-3">
-                    <!-- Bulan (hanya tampil di mobile) -->
-                    <div class="col-span-12 sm:col-span-2 hidden sm:block">
-                        <n-select placeholder="Bulan" clearable v-model:value="filterData.month" :options="months" />
-                    </div>
 
-                    <!-- Tipe (hanya tampil di mobile) -->
-                    <div class="col-span-12 sm:col-span-2 hidden sm:block">
-                        <n-select placeholder="Tipe" multiple clearable v-model:value="filterData.type"
-                            :options="paymentTypes" />
+                    <div class="col-span-12 ">
+                        <n-input-group>
+                            <n-select placeholder="Filter Data" clearable v-model:value="filterData.month"
+                                :options="months" :style="{ width: '40%' }" :consistent-menu-width="false" />
+                            <n-input placeholder="Nama Tagihan" clearable v-model:value="filterData.name" />
+                        </n-input-group>
                     </div>
-
-                    <!-- Input (selalu tampil) -->
-                    <div class="col-span-8">
-                        <n-input placeholder="Nama Tagihan" clearable v-model:value="filterData.name" />
-                    </div>
-
-                    <!-- Button Filter (desktop, ganti semua filter kecil) -->
-                    <div class="block sm:hidden col-span-4">
-                        <n-button type="primary" class="w-full">Filter</n-button>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2" v-if="hasFilter">
-                    <span class="font-semibold">Filter:</span>
-                    <n-tag v-if="filterData.month" type="info">Bulan: {{ filterData.month }}</n-tag>
-                    <n-tag v-for="t in filterData.type" :key="t" type="success">Tipe: {{ t }}</n-tag>
-                    <n-tag v-if="filterData.name" type="info">Nama: {{ filterData.name }}</n-tag>
                 </div>
 
             </div>
@@ -40,7 +22,7 @@
 
             <div class="flex flex-col gap-4">
                 <template v-for="i in 10">
-                    <BillsCard routeName="bills.show" :id="i" v-model:loading="loadingMap[i]" />
+                    <PaymentHistoryCard :id="i" v-model:loading="loadingMap[i]"/>
                 </template>
 
                 <div class="flex justify-between items-center">
@@ -49,28 +31,18 @@
                 </div>
             </div>
         </n-card>
-
-
     </AppLayout>
 </template>
 
 <script setup lang="ts">
 import AppLayout from '@/Layouts/AppLayout.vue';
 import HeaderBanner from '@/Components/HeaderBanner.vue';
-import BillsCard from '@/Components/BillsCard.vue';
-import { NSelect, NInput, NButton, NCard, NTag, NDivider, NPagination, NSpin } from 'naive-ui';
-import { reactive, computed, onMounted, onUnmounted, onBeforeMount, ref, onBeforeUnmount } from 'vue';
-
-interface IndexBills {
-    title: string;
-    bills: [];
-    breadcrumbs: [];
-}
-
-defineProps<IndexBills>();
+import PaymentHistoryCard from '@/Components/PaymentHistoryCard.vue';
+import { NSelect, NInput, NCard, NDivider, NPagination, NSpin, NInputGroup } from 'naive-ui';
+import { reactive, computed, onMounted, ref, onBeforeUnmount } from 'vue';
 
 const isSimple = ref(false);
-const loadingMap = ref<{[key: number]: boolean}>({});
+const loadingMap = ref<{ [key: number]: boolean }>({});
 
 // const breadcrumbs = [
 //     { label: "Daftar Tagihan", href: 'bills.index' },

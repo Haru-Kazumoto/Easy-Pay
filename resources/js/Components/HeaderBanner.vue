@@ -5,7 +5,7 @@
             <span class="text-2xl font-semibold">{{ title }}</span>
 
             <!-- Breadcrumb -->
-            <n-breadcrumb separator=">" class="mt-2 md:mt-0">
+            <n-breadcrumb separator=">" class="mt-2 md:mt-0" v-if="breadcrumbs">
                 <template v-for="data, index in breadcrumbs" :key="index">
                     <n-breadcrumb-item :href="data.id ? route(data.href, [data.id]) : route(data.href)">{{ data.label
                     }}</n-breadcrumb-item>
@@ -39,7 +39,7 @@ type BreadcrumbLinks = {
 }
 
 const props = defineProps({
-    breadcrumbs: { type: Array as PropType<BreadcrumbLinks[]>, required: true },
+    breadcrumbs: { type: Array as PropType<BreadcrumbLinks[]>, required: false },
     title: { type: String, required: true, default: "Default Title" },
     backRoute: { type: String, required: false }
 });

@@ -6,12 +6,12 @@
             <div class="grid grid-cols-8 gap-2">
                 <!-- Avatar -->
                 <div class="col-span-8 sm:col-span-2 flex items-center justify-center">
-                    <n-image width="250" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                    <n-image width="200" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
                         object-fit="cover" class="rounded-full" />
                 </div>
 
                 <!-- Profile Info -->
-                <div class="col-span-6 sm:col-span-8 p-4">
+                <div class="col-span-6 sm:col-span-6 p-4">
                     <!-- Header -->
                     <div class="p-2 bg-[#00809D] text-white rounded-md">
                         <span class="text-3xl font-bold">John Doe</span>

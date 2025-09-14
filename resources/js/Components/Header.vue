@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-[#00809D] border-gray-00">
+    <header class="bg-[#00809D]">
         <nav>
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <h1 class="text-4xl font-bold text-white">
@@ -46,14 +46,22 @@
                             </Link>
                         </li>
                         <li>
-                            <Link href="#"
-                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">
+                            <Link :href="route('bills.my-bills')" :class="[
+                                'block py-2 px-3 rounded-sm md:p-0',
+                                route().current('bills.my-bills')
+                                    ? 'text-yellow-400'
+                                    : 'text-white hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400'
+                            ]">
                             Tagihan
                             Saya</Link>
                         </li>
                         <li>
-                            <Link href="#"
-                                class="block py-2 px-3 rounded-sm hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400 md:p-0">
+                            <Link :href="route('payments.history')" :class="[
+                                'block py-2 px-3 rounded-sm md:p-0',
+                                route().current('payments.history')
+                                    ? 'text-yellow-400'
+                                    : 'text-white hover:bg-gray-100 hover:text-black md:hover:bg-transparent md:hover:text-gray-400'
+                            ]">
                             History
                             Pembayaran</Link>
                         </li>

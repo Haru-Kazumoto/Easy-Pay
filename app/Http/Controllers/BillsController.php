@@ -12,7 +12,30 @@ class BillsController extends Controller
      */
     public function index()
     {
-        return Inertia::render("Bills/Index");
+        return Inertia::render("Bills/Index", [
+            'title' => 'Daftar Tagihan',
+            'bills' => array(),
+            'breadcrumbs' => [
+                [
+                    'label' => 'Daftar Tagihan',
+                    'href' => 'bills.index'
+                ]
+            ]
+        ]);
+    }
+
+    public function indexOwn() 
+    {
+        return Inertia::render("Bills/Index", [
+            'title' => 'Tagihan Saya',
+            'bills' => array(),
+            'breadcrumbs' => [
+                [
+                    'label' => 'Tagihan Saya',
+                    'href' => 'bills.my-bills'
+                ]
+            ]
+        ]);
     }
 
     /**
