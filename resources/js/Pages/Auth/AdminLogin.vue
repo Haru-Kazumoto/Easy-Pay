@@ -7,8 +7,7 @@
         <div class="min-h-screen grid grid-cols-1 md:grid-cols-3">
             <!-- Kiri: Ornamen -->
             <div class="hidden md:flex flex-col items-center justify-center space-y-8 p-8 bg-white">
-                <img src="/images/ornamen-2.png" alt="Ornament 2" class="max-w-sm w-full object-contain -rotate-12" />
-                <img src="/images/ornamen-1.png" alt="Ornament 1" class="max-w-xs w-full object-contain -rotate-12" />
+                <img src="/images/ornamen-5.png" alt="Ornament 2" class="max-w-sm w-full object-contain" />
             </div>
 
             <!-- Kanan: Form -->
@@ -16,10 +15,10 @@
                 <div class="w-full max-w-sm text-white">
 
                     <h1 class="text-4xl font-bold">
-                        Easy<span class="text-yellow-400">Pay | ADMIN</span>
+                        Easy<span class="text-yellow-400">Pay</span>
                     </h1>
                     <span class="mt-2 mb-8 text-md leading-relaxed text-lg">
-                        Pantau dan kelola tagihan mu dengan mudah, cepat, dan aman!
+                        Halo admin, masukan kredensial mu dan jadikan hari ini lebih produktif!
                     </span>
 
                     <!-- <n-alert title="Akun Salah" type="error" closable>
@@ -27,14 +26,15 @@
                     </n-alert> -->
 
                     <n-form size="large" class="mt-8" ref="formRef" :rules="rules" :model="form">
-                        <n-form-item label="Email" label-style="color: white; font-size: 16px;" path="email">
-                            <n-input placeholder="Masukan email" v-model:value="form.email">
+                        <n-form-item label="UID" label-style="color: white; font-size: 16px;" path="user_uid">
+                            <n-input placeholder="Masukan nomor karyawan" v-model:value="form.user_uid">
                                 <template #prefix>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                            d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                                     </svg>
+
                                 </template>
                             </n-input>
                         </n-form-item>
@@ -127,7 +127,7 @@ import BaseLayout from '@/Layouts/BaseLayout.vue';
 import { ref } from 'vue';
 
 interface Login {
-    email: string;
+    user_uid: string;
     password: string;
     remember: boolean;
 }
@@ -139,13 +139,13 @@ defineProps({
 
 const formRef = ref<FormInst | null>(null);
 const form = useForm<Login>({
-    email: '',
+    user_uid: '',
     password: '',
     remember: false,
 });
 
 const rules: FormRules = {
-    email: { required: true, message: "Email harus diisi!", trigger: ['blur', 'change'] },
+    user_uid: { required: true, message: "Nomor karyawan harus diisi!", trigger: ['blur', 'change'] },
     password: { required: true, message: "Password harus diisi!", trigger: ['blur', 'change'] }
 }
 
