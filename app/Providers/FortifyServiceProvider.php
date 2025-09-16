@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Http\Requests\LoginRequest as CustomLoginRequest;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Requests\LoginRequest;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -48,9 +50,9 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-        Fortify::authenticateUsing(function($request) {
+        Fortify::authenticateUsing(function(Request $request) {
             if($request->is('admin/*')) {
-                $user = User::where('user_uid', $request->emp_id)->first();
+                $user = User::where('emp_id', $request->emp_id)->first();
             } else {
                 $user = User::where('email', $request->email)->first();
             }
@@ -69,5 +71,6 @@ class FortifyServiceProvider extends ServiceProvider
 
             return Inertia::render("Auth/Login");
         });
+
     }
 }

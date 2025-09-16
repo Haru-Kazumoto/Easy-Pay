@@ -26,8 +26,8 @@
                     </n-alert> -->
 
                     <n-form size="large" class="mt-8" ref="formRef" :rules="rules" :model="form">
-                        <n-form-item label="UID" label-style="color: white; font-size: 16px;" path="user_uid">
-                            <n-input placeholder="Masukan nomor karyawan" v-model:value="form.user_uid">
+                        <n-form-item label="UID" label-style="color: white; font-size: 16px;" path="emp_id">
+                            <n-input placeholder="Masukan nomor karyawan" v-model:value="form.emp_id">
                                 <template #prefix>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -127,7 +127,7 @@ import BaseLayout from '@/Layouts/BaseLayout.vue';
 import { ref } from 'vue';
 
 interface Login {
-    user_uid: string;
+    emp_id: string;
     password: string;
     remember: boolean;
 }
@@ -139,13 +139,13 @@ defineProps({
 
 const formRef = ref<FormInst | null>(null);
 const form = useForm<Login>({
-    user_uid: '',
+    emp_id: '',
     password: '',
     remember: false,
 });
 
 const rules: FormRules = {
-    user_uid: { required: true, message: "Nomor karyawan harus diisi!", trigger: ['blur', 'change'] },
+    emp_id: { required: true, message: "Nomor karyawan harus diisi!", trigger: ['blur', 'change'] },
     password: { required: true, message: "Password harus diisi!", trigger: ['blur', 'change'] }
 }
 
@@ -158,7 +158,7 @@ function submit(e: MouseEvent) {
         form.transform(data => ({
             ...data,
             remember: form.remember ? 'on' : '',
-        })).post(route('login'), {
+        })).post(route('admin.login'), {
             onFinish: () => form.reset('password'),
         });
     })
